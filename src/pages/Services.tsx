@@ -109,8 +109,23 @@ export const Services: React.FC = () => {
       <section className="py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-display font-bold text-primary-950">Our Operational Process</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">How we ensure quality remains consistent from farm to delivery.</p>
+            <motion.h2 
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-4xl font-display font-bold text-primary-950"
+            >
+              Our Operational Process
+            </motion.h2>
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-gray-600 mt-4 max-w-2xl mx-auto"
+            >
+              How we ensure quality remains consistent from farm to delivery.
+            </motion.p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -122,6 +137,10 @@ export const Services: React.FC = () => {
             ].map((p, i) => (
               <motion.div
                 key={i}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -10 }}
                 className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:bg-white hover:shadow-xl transition-all duration-300 relative overflow-hidden"
               >
@@ -137,9 +156,14 @@ export const Services: React.FC = () => {
       {/* Bulk CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="rounded-3xl bg-primary-900 p-12 lg:p-20 relative overflow-hidden">
+          <motion.div 
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            className="rounded-3xl bg-primary-900 p-12 lg:p-20 relative overflow-hidden"
+          >
              <div className="absolute inset-0 opacity-10">
-                <img src="/src/assets/images/poultry_farm_hero_1779029633495.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
              </div>
              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
                 <div className="max-w-2xl">
@@ -149,13 +173,18 @@ export const Services: React.FC = () => {
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-6">
-                  <a href={`https://wa.me/${CONTACT_INFO.whatsapp}`} className="btn-accent px-10 py-5">
+                  <motion.a 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={`https://wa.me/${CONTACT_INFO.whatsapp}`} 
+                    className="btn-accent px-10 py-5"
+                  >
                     <MessageCircle className="mr-2 w-5 h-5" />
                     Discuss Wholesale
-                  </a>
+                  </motion.a>
                 </div>
              </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </PageWrapper>

@@ -6,13 +6,36 @@ import { CONTACT_INFO } from '../constants';
 
 export const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: 'Commercial Broilers',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
+    
+    // Construct WhatsApp message
+    const text = `*New Inquiry for YSJ Farm Limited*%0A%0A` +
+      `*Name:* ${formData.name}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Phone:* ${formData.phone}%0A` +
+      `*Service:* ${formData.service}%0A` +
+      `*Message:* ${formData.message}`;
+    
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${text}`;
+
     setTimeout(() => {
       setFormStatus('success');
-    }, 1500);
+      window.open(whatsappUrl, '_blank');
+    }, 1000);
   };
 
   return (
@@ -23,6 +46,7 @@ export const Contact: React.FC = () => {
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
             <span className="text-accent-500 font-bold tracking-widest text-sm uppercase mb-4 block">Get In Touch</span>
@@ -41,7 +65,12 @@ export const Contact: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-16">
             {/* Contact Info Cards */}
-            <div className="lg:w-1/3 space-y-8">
+            <motion.div 
+              initial={{ x: -30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="lg:w-1/3 space-y-8"
+            >
               <div className="group p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-xl transition-all">
                 <div className="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center mb-6">
                   <Phone className="w-6 h-6 text-primary-700" />
@@ -68,16 +97,6 @@ export const Contact: React.FC = () => {
                 </a>
               </div>
 
-              <div className="group p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-xl transition-all">
-                <div className="w-12 h-12 bg-primary-900 rounded-2xl flex items-center justify-center mb-6">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-display font-bold text-primary-950 mb-2">Farm Location</h3>
-                <p className="text-gray-600 font-medium leading-relaxed">
-                  {CONTACT_INFO.address}
-                </p>
-              </div>
-
               <div className="group p-8 rounded-3xl bg-primary-900 text-white relative overflow-hidden">
                 <Clock className="w-12 h-12 text-accent-500/20 absolute -right-2 -top-2" />
                 <h3 className="text-lg font-display font-bold mb-4 flex items-center">
@@ -89,10 +108,15 @@ export const Contact: React.FC = () => {
                   Closed on Sundays and Public Holidays
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="lg:w-2/3">
+            <motion.div 
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="lg:w-2/3"
+            >
               <div className="glass-card p-8 lg:p-12 shadow-2xl relative overflow-hidden">
                 <div className="relative z-10">
                   <h2 className="text-3xl font-display font-bold text-primary-950 mb-8">Send Us a Message</h2>
@@ -106,8 +130,8 @@ export const Contact: React.FC = () => {
                       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle className="w-10 h-10 text-green-600" />
                       </div>
-                      <h3 className="text-2xl font-display font-bold text-primary-900 mb-2">Message Sent Successfully!</h3>
-                      <p className="text-gray-600">Thank you for reaching out. We will get back to you shortly.</p>
+                      <h3 className="text-2xl font-display font-bold text-primary-900 mb-2">Redirecting to WhatsApp...</h3>
+                      <p className="text-gray-600">Your inquiry has been processed. We are opening WhatsApp for direct communication.</p>
                       <button 
                         onClick={() => setFormStatus('idle')}
                         className="mt-8 text-primary-700 font-bold hover:underline"
@@ -122,6 +146,9 @@ export const Contact: React.FC = () => {
                           <label className="text-sm font-bold text-primary-900 uppercase tracking-wider ml-1">Full Name</label>
                           <input 
                             required
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
                             type="text" 
                             className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all"
                             placeholder="John Doe"
@@ -131,6 +158,9 @@ export const Contact: React.FC = () => {
                           <label className="text-sm font-bold text-primary-900 uppercase tracking-wider ml-1">Email Address</label>
                           <input 
                             required
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             type="email" 
                             className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all"
                             placeholder="john@example.com"
@@ -143,6 +173,9 @@ export const Contact: React.FC = () => {
                           <label className="text-sm font-bold text-primary-900 uppercase tracking-wider ml-1">Phone Number</label>
                           <input 
                             required
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
                             type="tel" 
                             className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all"
                             placeholder="080 1234 5678"
@@ -150,7 +183,12 @@ export const Contact: React.FC = () => {
                         </div>
                         <div className="space-y-2">
                           <label className="text-sm font-bold text-primary-900 uppercase tracking-wider ml-1">Service Required</label>
-                          <select className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all appearance-none cursor-pointer">
+                          <select 
+                            name="service"
+                            value={formData.service}
+                            onChange={handleChange}
+                            className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all appearance-none cursor-pointer"
+                          >
                             <option>Commercial Broilers</option>
                             <option>Frozen Chicken</option>
                             <option>Brooding Services</option>
@@ -164,6 +202,9 @@ export const Contact: React.FC = () => {
                         <label className="text-sm font-bold text-primary-900 uppercase tracking-wider ml-1">Your Message</label>
                         <textarea 
                           required
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
                           rows={6}
                           className="w-full px-6 py-4 rounded-xl bg-gray-50 border border-gray-100 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all resize-none"
                           placeholder="How can we help your poultry business today?"
@@ -175,14 +216,14 @@ export const Contact: React.FC = () => {
                         className="w-full btn-primary py-5 text-lg shadow-xl shadow-primary-900/20 disabled:opacity-70"
                       >
                         {formStatus === 'submitting' ? (
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-center space-x-2">
                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            <span>Sending...</span>
+                            <span>Processing...</span>
                           </div>
                         ) : (
                           <div className="flex items-center justify-center space-x-2">
-                            <Send className="w-5 h-5" />
-                            <span>Send Your Message</span>
+                            <MessageCircle className="w-5 h-5" />
+                            <span>Send via WhatsApp</span>
                           </div>
                         )}
                       </button>
@@ -190,7 +231,7 @@ export const Contact: React.FC = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -199,7 +240,12 @@ export const Contact: React.FC = () => {
       <section className="py-24 bg-gray-50 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-             <div className="lg:w-1/2">
+             <motion.div 
+               initial={{ x: -50, opacity: 0 }}
+               whileInView={{ x: 0, opacity: 1 }}
+               viewport={{ once: true }}
+               className="lg:w-1/2"
+             >
                 <h2 className="text-4xl font-display font-bold text-primary-950 mb-6">Visit Our Facility</h2>
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                   We are strategically located at Akobo, Ibadan, making us accessible for pickups and logistics. Schedule a visit to see our hygienic processes in action.
@@ -214,19 +260,15 @@ export const Contact: React.FC = () => {
                          <p className="text-gray-600">Road 5, Lamona, Oluhunda Akobo Ibadan, Nigeria</p>
                       </div>
                    </div>
-                   <div className="flex items-start space-x-4">
-                      <div className="w-10 h-10 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
-                         <Clock className="w-5 h-5 text-accent-700" />
-                      </div>
-                      <div>
-                         <p className="font-bold text-primary-900">Visiting Hours</p>
-                         <p className="text-gray-600">By Appointment only (Mon - Fri: 10AM - 4PM)</p>
-                      </div>
-                   </div>
                 </div>
-             </div>
+             </motion.div>
              
-             <div className="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl border-8 border-white p-2">
+             <motion.div 
+               initial={{ x: 50, opacity: 0 }}
+               whileInView={{ x: 0, opacity: 1 }}
+               viewport={{ once: true }}
+               className="lg:w-1/2 w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl border-8 border-white p-2"
+             >
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.427771746206!2d3.9558489000000003!3d7.4913214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039f37c39384813%3A0x6b4be933390c9181!2sAkobo%2C%20Ibadan!5e0!3m2!1sen!2sng!4v1715950000000!5m2!1sen!2sng" 
                   width="100%" 
@@ -235,33 +277,11 @@ export const Contact: React.FC = () => {
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="YSK Poultry Farm Location"
+                  title="YSJ Farm Limited Location"
                 ></iframe>
-             </div>
+             </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Social Join CTA */}
-      <section className="py-24">
-         <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-display font-bold text-primary-950 mb-12">Connect With Us On Social Media</h2>
-            <div className="flex flex-wrap justify-center gap-6">
-               {[
-                 { name: 'Instagram', color: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white' },
-                 { name: 'Facebook', color: 'bg-blue-600 text-white' },
-                 { name: 'WhatsApp', color: 'bg-green-600 text-white' }
-               ].map((social, i) => (
-                 <a 
-                   key={i}
-                   href="#" 
-                   className={`px-8 py-4 rounded-2xl font-bold flex items-center shadow-lg hover:scale-105 transition-transform ${social.color}`}
-                 >
-                   Follow on {social.name}
-                 </a>
-               ))}
-            </div>
-         </div>
       </section>
     </PageWrapper>
   );

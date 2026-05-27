@@ -1,0 +1,180 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helper Functions ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && (
+        request.auth.token.email_verified == true || 
+        request.auth.token.firebase.sign_in_provider == 'google.com'
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Role-based lookup helpers using the trusted 'profiles' collection
+    function getUserProfile(uid) {
+      return get(/databases/$(database)/documents/profiles/$(uid)).data;
+    }
+
+    function isUserAdmin(uid) {
+      return exists(/databases/$(database)/documents/profiles/$(uid)) && 
+             getUserProfile(uid).role == 'admin';
+    }
+
+    function isUserStaff(uid) {
+      return exists(/databases/$(database)/documents/profiles/$(uid)) && 
+             (getUserProfile(uid).role == 'staff' || getUserProfile(uid).role == 'manager' || getUserProfile(uid).role == 'admin');
+    }
+
+    // --- Entity Validation Functions ---
+
+    // 1. Profile Validation
+    function isValidProfile(data) {
+      return data.keys().hasAll(['id', 'email', 'role', 'full_name', 'created_at']) &&
+             data.keys().size() == 5 &&
+             data.id is string && data.id.size() <= 128 &&
+             data.email is string && data.email.size() <= 100 &&
+             data.role is string && (data.role == 'admin' || data.role == 'manager' || data.role == 'staff') &&
+             data.full_name is string && data.full_name.size() <= 100 &&
+             data.created_at is string; // ISO String
+    }
+
+    // 2. Batch Validation
+    function isValidBatch(data) {
+      return data.keys().hasAll(['id', 'name', 'stocking_date', 'initial_quantity', 'current_quantity', 'initial_feed_qty', 'breed', 'status', 'created_at']) &&
+             data.keys().size() == 9 &&
+             data.id is string && data.id.size() <= 64 &&
+             data.name is string && data.name.size() <= 200 &&
+             data.stocking_date is string && data.stocking_date.size() <= 30 &&
+             data.initial_quantity is int && data.initial_quantity >= 0 &&
+             data.current_quantity is int && data.current_quantity >= 0 &&
+             data.initial_feed_qty is number && data.initial_feed_qty >= 0.0 &&
+             data.breed is string && data.breed.size() <= 50 &&
+             data.status is string && (data.status == 'active' || data.status == 'completed' || data.status == 'archived') &&
+             data.created_at is string;
+    }
+
+    // 3. Daily Report Validation
+    function isValidDailyReport(data) {
+      return data.keys().hasAll(['id', 'batch_id', 'report_date', 'feed_consumed', 'mortality', 'medication', 'observations', 'staff_id', 'created_at']) &&
+             data.keys().size() == 9 &&
+             data.id is string && data.id.size() <= 64 &&
+             data.batch_id is string && data.batch_id.size() <= 64 &&
+             data.report_date is string && data.report_date.size() <= 30 &&
+             data.feed_consumed is number && data.feed_consumed >= 0.0 &&
+             data.mortality is int && data.mortality >= 0 &&
+             data.medication is string && data.medication.size() <= 1000 &&
+             data.observations is string && data.observations.size() <= 2000 &&
+             data.staff_id is string && data.staff_id.size() <= 128 &&
+             data.created_at is string;
+    }
+
+    // 4. Sales Entry Validation
+    function isValidSalesEntry(data) {
+      return data.keys().hasAll(['id', 'sale_date', 'item_name', 'category', 'quantity', 'unit_price', 'total_amount', 'customer_name', 'created_at']) &&
+             (data.keys().size() == 9 || (data.keys().size() == 10 && data.keys().hasAll(['batch_id']))) &&
+             data.id is string && data.id.size() <= 64 &&
+             data.sale_date is string && data.sale_date.size() <= 30 &&
+             data.item_name is string && data.item_name.size() <= 200 &&
+             data.category is string && (data.category == 'birds' || data.category == 'frozen' || data.category == 'other') &&
+             data.quantity is int && data.quantity >= 0 &&
+             data.unit_price is number && data.unit_price >= 0.0 &&
+             data.total_amount is number && data.total_amount >= 0.0 &&
+             data.customer_name is string && data.customer_name.size() <= 200 &&
+             (!data.keys().hasAll(['batch_id']) || (data.batch_id is string && data.batch_id.size() <= 64)) &&
+             data.created_at is string;
+    }
+
+    // 5. Maintenance Log Validation
+    function isValidMaintenanceLog(data) {
+      return data.keys().hasAll(['id', 'item_name', 'activity', 'log_date', 'cost', 'staff_id']) &&
+             data.keys().size() == 6 &&
+             data.id is string && data.id.size() <= 64 &&
+             data.item_name is string && data.item_name.size() <= 200 &&
+             data.activity is string && data.activity.size() <= 2000 &&
+             data.log_date is string && data.log_date.size() <= 30 &&
+             data.cost is number && data.cost >= 0.0 &&
+             data.staff_id is string && data.staff_id.size() <= 128;
+    }
+
+
+    // --- Collection Security Match Blocks ---
+
+    // 1. Profiles Rules
+    match /profiles/{profileId} {
+      // Any authenticated user can read profiles in the staff directory
+      allow get, list: if isEmailVerified();
+      
+      // An administrator is required to write, edit or grant roles
+      allow create, update, delete: if isEmailVerified() && (
+        isUserAdmin(request.auth.uid) || 
+        // Bootstrap option: Allow if it's the very first profile or matched developer email
+        (request.auth.uid == profileId && (
+          request.auth.token.email.lower() == 'adeagbojohnluj@gmail.com' ||
+          request.auth.token.email.lower() == 'admin@ysjfarm.com'
+        ))
+      ) && isValidProfile(incoming());
+    }
+
+    // 2. Batches Rules
+    match /batches/{batchId} {
+      allow get, list: if isEmailVerified() && isUserStaff(request.auth.uid);
+      allow create: if isEmailVerified() && isUserStaff(request.auth.uid) && isValidBatch(incoming());
+      
+      allow update: if isEmailVerified() && isUserStaff(request.auth.uid) && isValidBatch(incoming()) && (
+        isUserAdmin(request.auth.uid) ||
+        // Staff/manager can update the status or current quantity
+        incoming().diff(existing()).affectedKeys().hasOnly(['status', 'current_quantity'])
+      );
+      
+      allow delete: if isEmailVerified() && isUserAdmin(request.auth.uid);
+    }
+
+    // 3. Daily Reports Rules
+    match /daily_reports/{reportId} {
+      allow get, list: if isEmailVerified() && isUserStaff(request.auth.uid);
+      allow create: if isEmailVerified() && isUserStaff(request.auth.uid) && isValidDailyReport(incoming()) && 
+                    exists(/databases/$(database)/documents/batches/$(incoming().batch_id));
+                    
+      allow update, delete: if isEmailVerified() && isUserAdmin(request.auth.uid);
+    }
+
+    // 4. Sales Ledger Rules
+    match /sales_ledger/{saleId} {
+      allow get, list: if isEmailVerified() && isUserStaff(request.auth.uid);
+      allow create: if isEmailVerified() && isUserStaff(request.auth.uid) && isValidSalesEntry(incoming()) &&
+                    (!incoming().keys().hasAll(['batch_id']) || exists(/databases/$(database)/documents/batches/$(incoming().batch_id)));
+                    
+      allow update, delete: if isEmailVerified() && isUserAdmin(request.auth.uid);
+    }
+
+    // 5. Maintenance Logs Rules
+    match /maintenance_logs/{logId} {
+      allow get, list: if isEmailVerified() && isUserStaff(request.auth.uid);
+      allow create: if isEmailVerified() && isUserStaff(request.auth.uid) && isValidMaintenanceLog(incoming());
+      
+      allow update, delete: if isEmailVerified() && isUserAdmin(request.auth.uid);
+    }
+
+  }
+}

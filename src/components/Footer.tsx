@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Instagram, Facebook, Twitter, MessageCircle } from 'lucide-react';
 import { NAV_ITEMS, CONTACT_INFO } from '../constants';
+import { ChickenLogo } from './ChickenLogo';
 
 export const Footer: React.FC = () => {
   return (
@@ -12,15 +13,15 @@ export const Footer: React.FC = () => {
           <div className="space-y-6">
             <Link to="/" className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-primary-900 font-display font-bold text-xl">Y</span>
+                <ChickenLogo headColorClass="text-primary-900" className="w-8 h-8" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-bold text-lg leading-tight text-white">YSK POULTRY</span>
-                <span className="text-[10px] uppercase tracking-widest font-semibold text-primary-400">Farm & Supply</span>
+                <span className="font-display font-bold text-lg leading-tight text-white">YSJ FARM</span>
+                <span className="text-[10px] uppercase tracking-widest font-semibold text-primary-400">YSJ Farm Limited</span>
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Premium broiler production and frozen chicken supply in Ibadan. Committed to hygiene, health, and commercial excellence since 2023.
+              Premium broiler production and crop agriculture (Maize and Cashew) in Ibadan. Committed to hygiene, health, and standard agricultural practices since 2016.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-9 h-9 rounded-full bg-primary-900 flex items-center justify-center hover:bg-primary-700 transition-colors">
@@ -50,6 +51,15 @@ export const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/admin"
+                  className="text-accent-400 hover:text-white transition-colors text-sm inline-flex items-center group font-bold"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-500 mr-2 group-hover:bg-white transition-colors" />
+                  Admin Dashboard
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -57,7 +67,7 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="font-display font-bold text-lg mb-6">Our Services</h3>
             <ul className="space-y-4">
-              {['Broiler Production', 'Frozen Chicken Supply', 'Brooding Services', 'Bulk Poultry Supply'].map((service) => (
+              {['Broiler Production', 'Maize & Cashew Crops', 'Brooding Services', 'Bulk Poultry Supply'].map((service) => (
                 <li key={service}>
                   <Link
                     to="/services"
@@ -101,10 +111,10 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-primary-900 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest gap-4">
-          <p>© {new Date().getFullYear()} YSK Poultry Farm • Road 5, Lamona, Oluhunda Akobo Ibadan</p>
+          <p>© {new Date().getFullYear()} YSJ Farm Limited • Road 5, Lamona, Oluhunda Akobo Ibadan</p>
           <div className="flex gap-6">
-            <span className="hover:text-white transition-colors cursor-pointer">FB: yskpoultry</span>
-            <span className="hover:text-white transition-colors cursor-pointer">IG: @yskfarm_ibadan</span>
+            <span className="hover:text-white transition-colors cursor-pointer">FB: ysjpoultry</span>
+            <span className="hover:text-white transition-colors cursor-pointer">IG: @ysjfarm_ibadan</span>
             <span className="text-accent-400">Call: {CONTACT_INFO.phone}</span>
           </div>
         </div>

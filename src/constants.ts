@@ -8,9 +8,9 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const STATS: Stat[] = [
-  { label: 'Birds Managed', value: '7000', suffix: '+', description: 'Healthy broiler production' },
+  { label: 'Birds Managed', value: '20000', suffix: '+', description: 'Healthy broiler production' },
   { label: 'Farm Facility', value: '10', suffix: ' Acres', description: 'Modern agricultural infrastructure' },
-  { label: 'Operations', value: '2023', description: 'Trusted since start of operations' },
+  { label: 'Operations', value: '2016', description: 'Trusted since start of operations' },
   { label: 'Supply Capacity', value: '100', suffix: '%', description: 'Commercial scale reliability' },
 ];
 
@@ -31,9 +31,9 @@ export const FEATURES: Feature[] = [
     icon: 'Truck',
   },
   {
-    title: 'Quality Frozen Chicken',
-    description: 'Modern processing and fast freezing to lock in freshness.',
-    icon: 'Snowflake',
+    title: 'Maize & Cashew Crops',
+    description: 'Diversified cultivation producing top-grade yellow corn and raw cashew nuts.',
+    icon: 'Sprout',
   },
   {
     title: 'Experienced Operations',
@@ -56,38 +56,38 @@ export const SERVICES: Service[] = [
     features: ['Modern ventilated housing', 'Standard feeding protocols', 'Vaccination schedules', 'Bio-security control'],
   },
   {
-    id: 'frozen-chicken',
-    title: 'Frozen Chicken Supply',
-    description: 'Our processed chicken is frozen immediately after processing to maintain peak freshness and nutritional value for our diverse client base.',
-    imageUrl: '/src/assets/images/frozen_chicken_display_1779029651003.png',
-    features: ['Hygienic processing', 'Quick-freeze technology', 'Standard packaging', 'Consistent supply'],
+    id: 'crop-production',
+    title: 'Agriculture (Maize & Cashew)',
+    description: 'Beyond poultry, we run professional scale cultivation of top-quality Maize and organic Cashews. Our crops are harvested using standard practices to serve food processing and wholesale agro-allied markets.',
+    imageUrl: '/src/assets/images/maize_cashew_display_1779876761528.png',
+    features: ['High-yield Maize varieties', 'Organic Cashew cultivation', 'Modern grain storage silo', 'Wholesale commodity supply'],
   },
   {
     id: 'brooding-services',
     title: 'Poultry Brooding Services',
     description: 'Expert brooding management for day-old chicks, ensuring a strong foundation for healthy birds with low mortality rates.',
-    imageUrl: '/src/assets/images/poultry_management_1779029687347.png',
+    imageUrl: '/src/assets/images/poultry_brooding_house_1779879755249.png',
     features: ['Temperature control', 'Litter management', 'Early-stage nutrition', 'Close monitoring'],
   },
   {
     id: 'bulk-supply',
     title: 'Bulk Poultry Supply',
     description: 'Large-scale distribution services designed for distributors, hotels, and large-scale caterers across Ibadan and beyond.',
-    imageUrl: '/src/assets/images/poultry_farm_facility_1779029672411.png',
+    imageUrl: '/src/assets/images/poultry_pens_night_1779879694966.png',
     features: ['Wholesale pricing', 'Efficient logistics', 'Scheduled deliveries', 'Flexible orders'],
   },
 ];
 
 export const TIMELINE: Achievement[] = [
   {
-    year: '2023',
+    year: '2016',
     title: 'Foundation',
-    description: 'YSK Poultry Farm was established with a vision to revolutionize poultry production in Ibadan.',
+    description: 'YSJ Farm Limited was established with a vision to revolutionize poultry production in Ibadan.',
   },
   {
     year: '2024',
     title: 'Expansion',
-    description: 'Increased capacity to 7,000+ birds and established modern processing units.',
+    description: 'Increased bird capacity to 20,000+ birds and expanded operations into Maize & Cashew crops.',
   },
   {
     year: '2025',
@@ -104,7 +104,7 @@ export const TIMELINE: Achievement[] = [
 export const CONTACT_INFO = {
   phone: '09131201229',
   whatsapp: '2349131201229',
-  email: 'info@yskpoultry.com',
+  email: 'info@ysjpoultry.com',
   address: 'Road 5, Lamona, Oluhunda Akobo Ibadan, Nigeria',
   hours: 'Mon - Sat: 8:00 AM - 6:00 PM',
 };

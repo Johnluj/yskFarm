@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
-import { ChevronRight, ArrowRight, ShieldCheck, HeartPulse, Truck, Snowflake, Star, Users, Phone, MessageCircle } from 'lucide-react';
+import { ChevronRight, ArrowRight, ShieldCheck, HeartPulse, Truck, Sprout, Star, Users, Phone, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { STATS, FEATURES, SERVICES, CONTACT_INFO } from '../constants';
 
-const CountUp: React.FC<{ end: number; suffix?: string; description: string }> = ({ end, suffix = '', description }) => {
+const CountUp: React.FC<{ end: number; suffix?: string; label: string; showBorder?: boolean }> = ({ end, suffix = '', label, showBorder = true }) => {
   const [count, setCount] = useState(0);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
     if (inView) {
@@ -29,11 +29,13 @@ const CountUp: React.FC<{ end: number; suffix?: string; description: string }> =
   }, [inView, end]);
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="font-display font-bold text-4xl lg:text-5xl text-primary-800 mb-2">
+    <div ref={ref} className={`text-center flex flex-col items-center ${showBorder ? 'border-r border-white/10' : ''}`}>
+      <div className="text-3xl font-black text-accent-400">
         {count.toLocaleString()}{suffix}
       </div>
-      <p className="text-gray-600 font-medium text-sm lg:text-base">{description}</p>
+      <p className="text-[9px] uppercase font-bold tracking-[0.2em] opacity-70">
+        {label}
+      </p>
     </div>
   );
 };
@@ -43,7 +45,7 @@ const IconComponent: React.FC<{ name: string; className?: string }> = ({ name, c
     case 'ShieldCheck': return <ShieldCheck className={className} />;
     case 'HeartPulse': return <HeartPulse className={className} />;
     case 'Truck': return <Truck className={className} />;
-    case 'Snowflake': return <Snowflake className={className} />;
+    case 'Sprout': return <Sprout className={className} />;
     case 'Star': return <Star className={className} />;
     case 'Users': return <Users className={className} />;
     default: return null;
@@ -101,10 +103,10 @@ export const Home: React.FC = () => {
               <span className="text-[10px] font-bold uppercase tracking-widest">Premium Quality Supply In Ibadan</span>
             </span>
             <h1 className="font-display font-black text-5xl lg:text-7xl text-white leading-tight mb-8">
-              World-Class <span className="text-accent-400">Broiler</span> Production & Frozen Supply
+              World-Class <span className="text-accent-400">Poultry</span> & Sustainable Agriculture
             </h1>
             <p className="text-lg lg:text-xl text-gray-200 mb-10 leading-relaxed font-light max-w-lg">
-              Hygienically managed poultry products for distributors, restaurants, and hotels. Premium quality from the heart of Akobo, Ibadan.
+              Sustainably raised broilers under strict biosecurity alongside premium Maize and Cashew grain operations in Akobo, Ibadan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="px-8 py-4 bg-primary-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary-800 shadow-xl transition-transform active:scale-95 text-sm uppercase tracking-wider">
@@ -135,22 +137,10 @@ export const Home: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
           <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none"><path d="M0 50 Q 25 10, 50 50 T 100 50" fill="none" stroke="white" strokeWidth="0.5"/></svg>
         </div>
-        <div className="text-center border-r border-white/10 flex flex-col items-center">
-          <p className="text-3xl font-black text-accent-400">7,000+</p>
-          <p className="text-[9px] uppercase font-bold tracking-[0.2em] opacity-70">Birds Managed</p>
-        </div>
-        <div className="text-center md:border-r border-white/10 flex flex-col items-center">
-          <p className="text-3xl font-black text-accent-400">10 Acres</p>
-          <p className="text-[9px] uppercase font-bold tracking-[0.2em] opacity-70">Farm Facility</p>
-        </div>
-        <div className="text-center border-r border-white/10 md:border-0 md:border-r md:border-white/10 flex flex-col items-center mt-4 md:mt-0">
-          <p className="text-3xl font-black text-accent-400">2023</p>
-          <p className="text-[9px] uppercase font-bold tracking-[0.2em] opacity-70">Established</p>
-        </div>
-        <div className="text-center flex flex-col items-center mt-4 md:mt-0">
-          <p className="text-3xl font-black text-accent-400">100%</p>
-          <p className="text-[9px] uppercase font-bold tracking-[0.2em] opacity-70">Hygienic Control</p>
-        </div>
+        <CountUp end={20000} suffix="+" label="Birds Managed" />
+        <CountUp end={10} suffix=" Acres" label="Farm Facility" />
+        <CountUp end={2016} label="Established" />
+        <CountUp end={100} suffix="%" label="Hygienic Control" showBorder={false} />
       </section>
 
       {/* About Preview Section */}
@@ -165,7 +155,7 @@ export const Home: React.FC = () => {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/src/assets/images/poultry_management_1779029687347.png" 
+                  src="/src/assets/images/brooding_nigerian_farmer_1779877972163.png" 
                   alt="Farmer examining birds" 
                   className="w-full h-auto hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -184,12 +174,12 @@ export const Home: React.FC = () => {
               viewport={{ once: true }}
               className="lg:w-1/2"
             >
-              <span className="text-accent-600 font-bold tracking-widest text-sm uppercase mb-4 block">About YSK Poultry Farm</span>
+              <span className="text-accent-600 font-bold tracking-widest text-sm uppercase mb-4 block">About YSJ Farm Limited</span>
               <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary-900 mb-8 leading-tight">
                 Setting New Standards in <span className="text-primary-600">Poultry Excellence</span>
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Founded in 2023, YSK Poultry Farm has quickly grown into a leading name in Ibadan's agricultural sector. We combine traditional farming wisdom with modern scientific management to produce top-tier broilers and frozen poultry.
+                Founded in 2016, YSJ Farm Limited has quickly grown into a leading name in Ibadan's agricultural sector. We combine agricultural expertise with modern scientific management to produce top-tier broilers and commercial crops like Maize and Cashew.
               </p>
               <ul className="space-y-4 mb-10">
                 {['Direct farm-to-table supply', 'Fully automated processing line', 'Expert veterinary supervision'].map((item, i) => (
@@ -297,21 +287,37 @@ export const Home: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-             <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group">
-                <img src="/src/assets/images/poultry_farm_facility_1779029672411.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
+             <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
+                <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
+                  <p className="text-xs font-black uppercase tracking-widest text-accent-400">Exterior View</p>
+                  <h3 className="text-sm font-bold">YSJ Farm Pens at Night</h3>
+                </div>
              </div>
-             <div className="rounded-3xl overflow-hidden h-96 relative group">
-                <img src="/src/assets/images/poultry_management_1779029687347.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 font-display" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
+             <div className="rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
+                <img src="/src/assets/images/broiler_chick_close_1779879735924.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
+                  <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Quality Breed</p>
+                  <h3 className="text-sm font-bold">Healthy Broiler Chick</h3>
+                </div>
              </div>
-             <div className="rounded-3xl overflow-hidden h-96 relative group">
-                <img src="/src/assets/images/frozen_chicken_display_1779029651003.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
+             <div className="rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
+                <img src="/src/assets/images/poultry_brooding_house_1779879755249.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
+                  <p className="text-xs font-black uppercase tracking-widest text-accent-400">Brooding Phase</p>
+                  <h3 className="text-sm font-bold">Brooding Heat Management</h3>
+                </div>
              </div>
-             <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group">
-                <img src="/src/assets/images/poultry_farm_hero_1779029633495.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
+             <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
+                <img src="/src/assets/images/poultry_interior_chicks_1779879716202.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
+                  <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Deep Litter System</p>
+                  <h3 className="text-sm font-bold">Standard Ventilated Broilers</h3>
+                </div>
              </div>
           </div>
         </div>

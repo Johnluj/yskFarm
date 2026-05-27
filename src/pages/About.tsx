@@ -10,7 +10,7 @@ export const About: React.FC = () => {
       {/* Hero Header */}
       <section className="relative pt-40 pb-24 bg-primary-950 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-           <img src="/src/assets/images/poultry_management_1779029687347.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+           <img src="/src/assets/images/brooding_nigerian_farmer_1779877972163.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -23,7 +23,7 @@ export const About: React.FC = () => {
               A Vision for Sustainable <span className="text-accent-400">Poultry Excellence</span>
             </h1>
             <p className="text-xl text-primary-200 font-light leading-relaxed">
-              From our humble beginnings at Akobo to becoming a trusted name in commercial poultry supply across Ibadan, our journey is defined by quality, hygiene, and unwavering commitment.
+              From our humble beginnings at Akobo to becoming a trusted name in commercial agricultural supply across Ibadan, our journey is defined by quality, hygiene, and unwavering commitment.
             </p>
           </motion.div>
         </div>
@@ -33,35 +33,77 @@ export const About: React.FC = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-20">
-            <div className="lg:w-1/2">
-              <h2 className="text-accent-600 font-bold tracking-widest text-sm uppercase mb-4 block">The Founder's Story</h2>
-              <h3 className="text-4xl font-display font-bold text-primary-950 mb-8">Pioneered by Passion, Led by "Mr Sam"</h3>
+            <motion.div 
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:w-1/2"
+            >
+              <h2 className="text-accent-600 font-bold tracking-widest text-sm uppercase mb-4 block">Our Leadership</h2>
+              <h3 className="text-4xl font-display font-bold text-primary-950 mb-8">Pioneered by Madam MD & Mr Sam</h3>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  YSK Poultry Farm was born out of a desire to provide Ibadan and its environs with poultry products that meet international standards of hygiene and quality. Our founder, <span className="text-primary-800 font-bold">Mr Sam</span>, envisioned a farm where biosecurity and bird health come first.
+                  YSJ Farm Limited was born out of a desire to provide Ibadan and its environs with premium poultry and agricultural products that meet international standards of hygiene and quality. Under the visionary direction of <span className="text-primary-800 font-bold">Madam MD</span> (Managing Director) and <span className="text-primary-800 font-bold">Mr Sam</span> (Deputy Managing Director), our farm is built on absolute commitment to biosecurity and excellence.
                 </p>
                 <p>
-                  Starting in 2023 at Road 5, Lamona, Oluhunda Akobo, the farm was built on the pillars of professional management and commercial scalability. "Healthy birds for healthy people" isn't just a slogan for us—it's the core of our daily operations.
+                  Starting in 2016 at Road 5, Lamona, Oluhunda Akobo, the farm was established on the pillars of professional management and commercial scalability. "Healthy agricultural produce and healthy birds for healthy people" is the core of our daily operations.
                 </p>
                 <p>
-                  Today, YSK Poultry Farm stands as a testament to what's possible when modern agricultural techniques are applied with a local heart.
+                  Today, YSJ Farm Limited stands as a leading multithreaded enterprise, driving commercial broiler production alongside high-yield Maize and Cashew supply chains across Nigeria.
                 </p>
               </div>
-              <div className="mt-10 p-8 glass-card bg-primary-50/50 border-primary-100 italic font-medium text-primary-800">
-                "Our goal isn't just to sell chicken; it's to provide peace of mind to every chef, caterer, and household that uses our products." — Mr Sam
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="mt-10 p-8 glass-card bg-primary-50/50 border-primary-100 italic font-medium text-primary-800"
+              >
+                "With sustainable methods, meticulous sanitary rules, and dynamic crop cultivation, we deliver trusted quality to every buyer." — Madam MD & Mr Sam
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:w-1/2"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 relative">
+                {/* Madam MD Card */}
+                <div className="bg-white p-5 rounded-[2.5rem] border border-slate-100 shadow-xl group hover:shadow-2xl transition-all duration-500">
+                  <div className="rounded-3xl overflow-hidden aspect-[4/5] relative mb-5">
+                    <img 
+                      src="/src/assets/images/madam_md_portrait_1779877596284_1779878837103.png" 
+                      alt="Madam MD (Managing Director)" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="text-center pb-2">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-accent-700 mb-1">Managing Director</p>
+                    <h4 className="text-2xl font-display font-black text-primary-950 leading-tight">Madam MD</h4>
+                  </div>
+                </div>
+
+                {/* Mr Sam Card */}
+                <div className="bg-white p-5 rounded-[2.5rem] border border-slate-100 shadow-xl group hover:shadow-2xl transition-all duration-500 sm:translate-y-6">
+                  <div className="rounded-3xl overflow-hidden aspect-[4/5] relative mb-5">
+                    <img 
+                      src="/src/assets/images/mr_sam_portrait_1779877574755_1779878859714.png" 
+                      alt="Mr Sam (Deputy Managing Director)" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="text-center pb-2">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-accent-700 mb-1">Deputy Managing Director</p>
+                    <h4 className="text-2xl font-display font-black text-primary-950 leading-tight">Mr Sam</h4>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="lg:w-1/2 relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl relative z-10">
-                <img 
-                  src="/src/assets/images/poultry_management_1779029687347.png" 
-                  alt="Founder or Farmer working" 
-                  className="w-full h-auto"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div className="absolute -top-10 -right-10 w-full h-full border-4 border-accent-500 rounded-3xl -z-10 opacity-20" />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -71,6 +113,9 @@ export const About: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <motion.div 
+               initial={{ y: 50, opacity: 0 }}
+               whileInView={{ y: 0, opacity: 1 }}
+               viewport={{ once: true }}
                whileHover={{ y: -10 }}
                className="bg-white p-12 rounded-3xl shadow-xl border border-primary-100"
             >
@@ -84,6 +129,10 @@ export const About: React.FC = () => {
             </motion.div>
             
             <motion.div 
+               initial={{ y: 50, opacity: 0 }}
+               whileInView={{ y: 0, opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ delay: 0.2 }}
                whileHover={{ y: -10 }}
                className="bg-white p-12 rounded-3xl shadow-xl border border-primary-100"
             >
@@ -167,10 +216,10 @@ export const About: React.FC = () => {
             </div>
             <div className="lg:w-2/3 grid grid-cols-2 gap-6">
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl mt-8">
-                 <img src="/src/assets/images/poultry_farm_facility_1779029672411.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl">
-                 <img src="/src/assets/images/poultry_farm_hero_1779029633495.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/src/assets/images/poultry_interior_chicks_1779879716202.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             </div>
           </div>

@@ -1,0 +1,105 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile in the poultry system, defining their security role and access",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The user's unique authentication ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "role": { "type": "string", "enum": ["admin", "manager", "staff"], "description": "System access role" },
+        "full_name": { "type": "string", "description": "Display name" },
+        "created_at": { "type": "string", "format": "date-time", "description": "Timestamp of profile creation" }
+      },
+      "required": ["id", "email", "role", "full_name", "created_at"]
+    },
+    "Batch": {
+      "title": "Batch",
+      "description": "A batch of birds stocked for commercial rearing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the batch" },
+        "name": { "type": "string", "description": "Display name of the batch" },
+        "stocking_date": { "type": "string", "format": "date", "description": "Date stocked" },
+        "initial_quantity": { "type": "integer", "description": "Number of birds originally stocked" },
+        "current_quantity": { "type": "integer", "description": "Current number of birds remaining" },
+        "initial_feed_qty": { "type": "number", "description": "Starting feed quota in kg" },
+        "breed": { "type": "string", "description": "Breed category (e.g. broilers, layers, turkey)" },
+        "status": { "type": "string", "enum": ["active", "completed", "archived"], "description": "Batch state" },
+        "created_at": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "stocking_date", "initial_quantity", "current_quantity", "initial_feed_qty", "breed", "status", "created_at"]
+    },
+    "DailyReport": {
+      "title": "DailyReport",
+      "description": "Daily monitoring log for a specific batch",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique report identifier" },
+        "batch_id": { "type": "string", "description": "Associated batch ID" },
+        "report_date": { "type": "string", "format": "date", "description": "Date of monitoring" },
+        "feed_consumed": { "type": "number", "description": "Feed consumed in kg" },
+        "mortality": { "type": "integer", "description": "Number of bird deaths on this day" },
+        "medication": { "type": "string", "description": "Medication or vaccine notes" },
+        "observations": { "type": "string", "description": "General farm observation logs" },
+        "staff_id": { "type": "string", "description": "ID of staff who logged the entry" },
+        "created_at": { "type": "string", "format": "date-time", "description": "Logging timestamp" }
+      },
+      "required": ["id", "batch_id", "report_date", "feed_consumed", "mortality", "medication", "observations", "staff_id", "created_at"]
+    },
+    "SalesEntry": {
+      "title": "SalesEntry",
+      "description": "Sales ledger entry for sold birds or agricultural products",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique transaction key" },
+        "batch_id": { "type": "string", "description": "ID of the source batch if selling birds" },
+        "sale_date": { "type": "string", "format": "date", "description": "Transaction date" },
+        "item_name": { "type": "string", "description": "Item description" },
+        "category": { "type": "string", "description": "Sales category (birds, frozen, other)" },
+        "quantity": { "type": "integer", "description": "Sold quantity" },
+        "unit_price": { "type": "number", "description": "Per unit rate" },
+        "total_amount": { "type": "number", "description": "Total sales revenue" },
+        "customer_name": { "type": "string", "description": "Buyer company/individual name" },
+        "created_at": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["id", "sale_date", "item_name", "category", "quantity", "unit_price", "total_amount", "customer_name", "created_at"]
+    },
+    "MaintenanceLog": {
+      "title": "MaintenanceLog",
+      "description": "Farm facilities and hardware upkeep ledger",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique record key" },
+        "item_name": { "type": "string", "description": "Damaged/serviced machinery or pen item" },
+        "activity": { "type": "string", "description": "Service report" },
+        "cost": { "type": "number", "description": "Operational overhead cost" },
+        "log_date": { "type": "string", "format": "date", "description": "Upkeep date" },
+        "staff_id": { "type": "string", "description": "ID of recording specialist" }
+      },
+      "required": ["id", "item_name", "activity", "cost", "log_date", "staff_id"]
+    }
+  },
+  "firestore": {
+    "/profiles/{profileId}": {
+      "schema": "Profile",
+      "description": "Registry of administrative staff and farm keepers"
+    },
+    "/batches/{batchId}": {
+      "schema": "Batch",
+      "description": "Batches of poultry currently stocked or historically completed"
+    },
+    "/daily_reports/{reportId}": {
+      "schema": "DailyReport",
+      "description": "Rearing activity records logged per day per batch"
+    },
+    "/sales_ledger/{saleId}": {
+      "schema": "SalesEntry",
+      "description": "Sales ledger documenting off-taken birds and produce transactions"
+    },
+    "/maintenance_logs/{logId}": {
+      "schema": "MaintenanceLog",
+      "description": "Machinery, pen repairs, and facility maintenance expenditure entries"
+    }
+  }
+}

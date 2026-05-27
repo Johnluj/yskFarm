@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight, Phone } from 'lucide-react';
 import { NAV_ITEMS, CONTACT_INFO } from '../constants';
+import { ChickenLogo } from './ChickenLogo';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,11 +32,11 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-primary-900 rounded-lg flex items-center justify-center">
-              <span className="text-accent-400 font-display font-bold text-lg md:text-xl leading-none">Y</span>
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-[#064e3b] rounded-lg flex items-center justify-center">
+              <ChickenLogo headColorClass="text-white" className="w-6 h-6 md:w-8 md:h-8" />
             </div>
             <div className="flex flex-col">
-              <span className={`font-display font-extrabold text-lg tracking-tight uppercase leading-none transition-colors duration-300 ${isScrolled ? 'text-primary-900' : 'text-white'}`}>YSK Poultry Farm</span>
+              <span className={`font-display font-extrabold text-lg tracking-tight uppercase leading-none transition-colors duration-300 ${isScrolled ? 'text-primary-900' : 'text-white'}`}>YSJ Farm Limited</span>
               <span className={`text-[9px] uppercase tracking-[0.2em] font-bold mt-0.5 transition-colors duration-300 ${isScrolled ? 'text-primary-600' : 'text-primary-200'}`}>Commercial Supply</span>
             </div>
           </Link>
@@ -79,35 +80,36 @@ export const Navbar: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-b border-slate-100 overflow-hidden"
           >
-            <div className="px-4 pt-2 pb-6 space-y-1">
+            <div className="px-4 py-6 space-y-2">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`block px-3 py-4 text-base font-medium rounded-md transition-colors ${
+                  className={`block px-4 py-4 text-sm font-bold uppercase tracking-wider rounded-xl transition-all ${
                     location.pathname === item.href
-                      ? 'text-primary-700 bg-primary-50'
-                      : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                      ? 'text-primary-900 bg-primary-50 border-l-4 border-accent-400'
+                      : 'text-slate-600 hover:text-primary-800 hover:bg-slate-50'
                   }`}
                 >
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-sm">
                     <span>{item.label}</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4 opacity-50" />
                   </div>
                 </Link>
               ))}
-              <div className="pt-4">
-                <a
-                  href={`tel:${CONTACT_INFO.phone}`}
-                  className="w-full btn-primary"
+              <div className="pt-6 px-2">
+                <Link
+                  to="/contact"
+                  className="w-full btn-primary py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-3"
                 >
-                  Call Now: {CONTACT_INFO.phone}
-                </a>
+                  <Phone className="w-4 h-4" />
+                  Request Poultry Quote
+                </Link>
               </div>
             </div>
           </motion.div>
