@@ -216,10 +216,10 @@ export const About: React.FC = () => {
             </div>
             <div className="lg:w-2/3 grid grid-cols-2 gap-6">
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl mt-8">
-                 <img src="/images/poultry_8.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/images/maize_farm.webp" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl">
-                 <img src="/images/poultry_6.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/images/poultry_8.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             </div>
           </div>

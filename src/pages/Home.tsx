@@ -304,19 +304,19 @@ export const Home: React.FC = () => {
                 </div>
              </div>
              <div className="rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/images/poultry_4.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/maize_farm.webp" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
-                  <p className="text-xs font-black uppercase tracking-widest text-accent-400">Brooding Phase</p>
-                  <h3 className="text-sm font-bold">Brooding Heat Management</h3>
+                  <p className="text-xs font-black uppercase tracking-widest text-accent-400">Maize Production</p>
+                  <h3 className="text-sm font-bold">Commercial Yellow Corn</h3>
                 </div>
              </div>
              <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/images/poultry_6.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/cashew_nuts.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
-                  <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Deep Litter System</p>
-                  <h3 className="text-sm font-bold">Standard Ventilated Broilers</h3>
+                  <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Cashew Cultivation</p>
+                  <h3 className="text-sm font-bold">Premium Raw Cashew Nuts</h3>
                 </div>
              </div>
           </div>
