@@ -59,7 +59,7 @@ export const SERVICES: Service[] = [
     id: 'maize-production',
     title: 'Maize Production',
     description: 'Professional scale cultivation of top-quality yellow corn, harvested using standard practices to serve food processing and wholesale agro-allied markets.',
-    imageUrl: '/images/maize_farm.jpg',
+    imageUrl: '/images/maize_farm.webp',
     features: ['High-yield Maize varieties', 'Modern grain storage silo', 'Wholesale commodity supply', 'Standard processing'],
   },
   {
