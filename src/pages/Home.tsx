@@ -83,7 +83,7 @@ export const Home: React.FC = () => {
       <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/poultry_farm_hero_1779029633495.png"
+            src="/images/poultry_1.jpg"
             alt="Poultry Farm Hero"
             className="w-full h-full object-cover scale-105"
             referrerPolicy="no-referrer"
@@ -155,7 +155,7 @@ export const Home: React.FC = () => {
             >
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/src/assets/images/brooding_nigerian_farmer_1779877972163.png" 
+                  src="/images/poultry_3.jpg"
                   alt="Farmer examining birds" 
                   className="w-full h-auto hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -288,7 +288,7 @@ export const Home: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
              <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/poultry_8.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
                   <p className="text-xs font-black uppercase tracking-widest text-accent-400">Exterior View</p>
@@ -296,7 +296,7 @@ export const Home: React.FC = () => {
                 </div>
              </div>
              <div className="rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/src/assets/images/broiler_chick_close_1779879735924.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/poultry_2.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
                   <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Quality Breed</p>
@@ -304,7 +304,7 @@ export const Home: React.FC = () => {
                 </div>
              </div>
              <div className="rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/src/assets/images/poultry_brooding_house_1779879755249.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/poultry_4.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
                   <p className="text-xs font-black uppercase tracking-widest text-accent-400">Brooding Phase</p>
@@ -312,7 +312,7 @@ export const Home: React.FC = () => {
                 </div>
              </div>
              <div className="md:col-span-2 rounded-3xl overflow-hidden h-96 relative group border border-slate-100 shadow-md">
-                <img src="/src/assets/images/poultry_interior_chicks_1779879716202.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                <img src="/images/poultry_6.jpg" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 <div className="absolute bottom-6 left-6 text-white z-10 glass-card bg-primary-950/60 px-4 py-2 border-primary-800">
                   <p className="text-xs font-black uppercase tracking-widest text-[#fbbf24]">Deep Litter System</p>
@@ -327,7 +327,7 @@ export const Home: React.FC = () => {
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary-800" />
         <div className="absolute inset-0 opacity-20">
-           <img src="/src/assets/images/poultry_farm_facility_1779029672411.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+           <img src="/images/poultry_9.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.div
