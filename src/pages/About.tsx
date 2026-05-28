@@ -10,7 +10,7 @@ export const About: React.FC = () => {
       {/* Hero Header */}
       <section className="relative pt-40 pb-24 bg-primary-950 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-           <img src="/src/assets/images/brooding_nigerian_farmer_1779877972163.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+           <img src="/images/poultry_3.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -75,7 +75,7 @@ export const About: React.FC = () => {
                 <div className="bg-white p-5 rounded-[2.5rem] border border-slate-100 shadow-xl group hover:shadow-2xl transition-all duration-500">
                   <div className="rounded-3xl overflow-hidden aspect-[4/5] relative mb-5">
                     <img 
-                      src="/src/assets/images/madam_md_portrait_1779877596284_1779878837103.png" 
+                      src="/images/portrait_md.png"
                       alt="Madam MD (Managing Director)" 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
@@ -91,7 +91,7 @@ export const About: React.FC = () => {
                 <div className="bg-white p-5 rounded-[2.5rem] border border-slate-100 shadow-xl group hover:shadow-2xl transition-all duration-500 sm:translate-y-6">
                   <div className="rounded-3xl overflow-hidden aspect-[4/5] relative mb-5">
                     <img 
-                      src="/src/assets/images/mr_sam_portrait_1779877574755_1779878859714.png" 
+                      src="/images/portrait_sam.png"
                       alt="Mr Sam (Deputy Managing Director)" 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
@@ -216,10 +216,10 @@ export const About: React.FC = () => {
             </div>
             <div className="lg:w-2/3 grid grid-cols-2 gap-6">
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl mt-8">
-                 <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/images/maize_farm.webp" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
               <div className="rounded-2xl overflow-hidden h-80 shadow-2xl">
-                 <img src="/src/assets/images/poultry_interior_chicks_1779879716202.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                 <img src="/images/poultry_8.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             </div>
           </div>

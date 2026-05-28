@@ -163,7 +163,7 @@ export const Services: React.FC = () => {
             className="rounded-3xl bg-primary-900 p-12 lg:p-20 relative overflow-hidden"
           >
              <div className="absolute inset-0 opacity-10">
-                <img src="/src/assets/images/poultry_pens_night_1779879694966.png" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src="/images/poultry_8.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
              </div>
              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
                 <div className="max-w-2xl">
